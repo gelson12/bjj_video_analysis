@@ -1,0 +1,49 @@
+2024-11-22 12:32:01,094 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.18.0.3:5000
+2024-11-22 12:32:01,096 - INFO - [33mPress CTRL+C to quit[0m
+2024-11-22 12:32:15,852 - INFO - Downloading video segment from https://www.youtube.com/watch?v=5E0paqb01hM
+2024-11-22 12:36:20,231 - ERROR - Failed to download video segment from https://www.youtube.com/watch?v=5E0paqb01hM
+2024-11-22 12:36:20,233 - ERROR - An error occurred during video segment processing.
+Traceback (most recent call last):
+  File "/app/video_processor.py", line 64, in process_video_segment
+    raise FileNotFoundError(f"Downloaded video file is missing or empty: {video_filepath}")
+FileNotFoundError: Downloaded video file is missing or empty: downloads/temp_video_1.mp4
+2024-11-22 12:36:20,265 - ERROR - An error occurred during YouTube video processing.
+Traceback (most recent call last):
+  File "/app/app.py", line 119, in process_youtube_video
+    output_path = process_video_segment(
+  File "/app/video_processor.py", line 88, in process_video_segment
+    raise e
+  File "/app/video_processor.py", line 64, in process_video_segment
+    raise FileNotFoundError(f"Downloaded video file is missing or empty: {video_filepath}")
+FileNotFoundError: Downloaded video file is missing or empty: downloads/temp_video_1.mp4
+2024-11-22 12:36:20,268 - INFO - 172.18.0.1 - - [22/Nov/2024 12:36:20] "[35m[1mPOST /process_video HTTP/1.1[0m" 500 -
+2024-11-22 17:10:23,138 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.18.0.3:5000
+2024-11-22 17:10:23,139 - INFO - [33mPress CTRL+C to quit[0m
+2024-11-22 17:17:18,543 - INFO - Downloading video segment from https://www.youtube.com/watch?v=5E0paqb01hM
+2024-11-22 17:21:29,629 - ERROR - Failed to download video segment from https://www.youtube.com/watch?v=5E0paqb01hM
+2024-11-22 17:21:29,630 - ERROR - An error occurred during video segment processing.
+Traceback (most recent call last):
+  File "/app/video_processor.py", line 64, in process_video_segment
+    raise FileNotFoundError(f"Downloaded video file is missing or empty: {video_filepath}")
+FileNotFoundError: Downloaded video file is missing or empty: downloads/temp_video_1.mp4
+2024-11-22 17:21:29,632 - ERROR - An error occurred during YouTube video processing.
+Traceback (most recent call last):
+  File "/app/app.py", line 119, in process_youtube_video
+    output_path = process_video_segment(
+  File "/app/video_processor.py", line 88, in process_video_segment
+    raise e
+  File "/app/video_processor.py", line 64, in process_video_segment
+    raise FileNotFoundError(f"Downloaded video file is missing or empty: {video_filepath}")
+FileNotFoundError: Downloaded video file is missing or empty: downloads/temp_video_1.mp4
+2024-11-22 17:21:29,634 - INFO - 172.18.0.1 - - [22/Nov/2024 17:21:29] "[35m[1mPOST /process_video HTTP/1.1[0m" 500 -
+2024-11-24 17:07:03,936 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.18.0.3:5000
+2024-11-24 17:07:03,937 - INFO - [33mPress CTRL+C to quit[0m
