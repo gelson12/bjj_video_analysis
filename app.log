@@ -47,3 +47,92 @@ FileNotFoundError: Downloaded video file is missing or empty: downloads/temp_vid
  * Running on http://127.0.0.1:5000
  * Running on http://172.18.0.3:5000
 2024-11-24 17:07:03,937 - INFO - [33mPress CTRL+C to quit[0m
+2024-11-27 17:21:29,318 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.18.0.3:5000
+2024-11-27 17:21:29,319 - INFO - [33mPress CTRL+C to quit[0m
+2024-11-27 17:22:43,823 - INFO - Downloading full video from https://www.youtube.com/watch?v=5E0paqb01hM
+2024-11-27 17:22:51,672 - WARNING - [youtube] Unable to download webpage: HTTP Error 429: Too Many Requests
+2024-11-27 17:22:52,720 - WARNING - [youtube] Unable to fetch PO Token for mweb client: Missing required Visitor Data. You may need to pass Visitor Data with --extractor-args "youtube:visitor_data=XXX"
+2024-11-27 17:23:22,936 - ERROR - ERROR: [youtube] 5E0paqb01hM: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+2024-11-27 17:23:22,937 - ERROR -   File "/usr/local/lib/python3.10/site-packages/yt_dlp/extractor/common.py", line 742, in extract
+    ie_result = self._real_extract(url)
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/extractor/youtube.py", line 4465, in _real_extract
+    self.raise_no_formats(reason, expected=True)
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/extractor/common.py", line 1276, in raise_no_formats
+    raise ExtractorError(msg, expected=expected, video_id=video_id)
+
+2024-11-27 17:23:22,938 - ERROR - An error occurred during video segment processing.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/YoutubeDL.py", line 1624, in wrapper
+    return func(self, *args, **kwargs)
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/YoutubeDL.py", line 1759, in __extract_info
+    ie_result = ie.extract(url)
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/extractor/common.py", line 742, in extract
+    ie_result = self._real_extract(url)
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/extractor/youtube.py", line 4465, in _real_extract
+    self.raise_no_formats(reason, expected=True)
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/extractor/common.py", line 1276, in raise_no_formats
+    raise ExtractorError(msg, expected=expected, video_id=video_id)
+yt_dlp.utils.ExtractorError: [youtube] 5E0paqb01hM: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/video_processor.py", line 64, in process_video_segment
+    download_full_video(video_url, full_video_filepath)
+  File "/app/video_processor.py", line 32, in download_full_video
+    ydl.download([video_url])
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/YoutubeDL.py", line 3604, in download
+    self.__download_wrapper(self.extract_info)(
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/YoutubeDL.py", line 3577, in wrapper
+    res = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/YoutubeDL.py", line 1613, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/YoutubeDL.py", line 1642, in wrapper
+    self.report_error(str(e), e.format_traceback())
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/YoutubeDL.py", line 1090, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/YoutubeDL.py", line 1029, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [youtube] 5E0paqb01hM: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+2024-11-27 17:23:22,940 - ERROR - An error occurred during YouTube video processing.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/YoutubeDL.py", line 1624, in wrapper
+    return func(self, *args, **kwargs)
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/YoutubeDL.py", line 1759, in __extract_info
+    ie_result = ie.extract(url)
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/extractor/common.py", line 742, in extract
+    ie_result = self._real_extract(url)
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/extractor/youtube.py", line 4465, in _real_extract
+    self.raise_no_formats(reason, expected=True)
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/extractor/common.py", line 1276, in raise_no_formats
+    raise ExtractorError(msg, expected=expected, video_id=video_id)
+yt_dlp.utils.ExtractorError: [youtube] 5E0paqb01hM: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/app/app.py", line 119, in process_youtube_video
+    output_path = process_video_segment(
+  File "/app/video_processor.py", line 99, in process_video_segment
+    raise e
+  File "/app/video_processor.py", line 64, in process_video_segment
+    download_full_video(video_url, full_video_filepath)
+  File "/app/video_processor.py", line 32, in download_full_video
+    ydl.download([video_url])
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/YoutubeDL.py", line 3604, in download
+    self.__download_wrapper(self.extract_info)(
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/YoutubeDL.py", line 3577, in wrapper
+    res = func(*args, **kwargs)
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/YoutubeDL.py", line 1613, in extract_info
+    return self.__extract_info(url, self.get_info_extractor(key), download, extra_info, process)
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/YoutubeDL.py", line 1642, in wrapper
+    self.report_error(str(e), e.format_traceback())
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/YoutubeDL.py", line 1090, in report_error
+    self.trouble(f'{self._format_err("ERROR:", self.Styles.ERROR)} {message}', *args, **kwargs)
+  File "/usr/local/lib/python3.10/site-packages/yt_dlp/YoutubeDL.py", line 1029, in trouble
+    raise DownloadError(message, exc_info)
+yt_dlp.utils.DownloadError: ERROR: [youtube] 5E0paqb01hM: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+2024-11-27 17:23:22,942 - INFO - 172.18.0.1 - - [27/Nov/2024 17:23:22] "[35m[1mPOST /process_video HTTP/1.1[0m" 500 -
