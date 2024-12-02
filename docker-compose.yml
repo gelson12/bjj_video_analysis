@@ -19,6 +19,8 @@ services:
       - DB_PASSWORD=password
       - DB_NAME=pose_db
       - YTDLP_COOKIES_PATH=/app/cookies.txt  # Environment variable for cookies path
+      - YOUTUBE_EMAIL=${YOUTUBE_EMAIL}
+      - YOUTUBE_PASSWORD=${YOUTUBE_PASSWORD}
     depends_on:
       db:
         condition: service_healthy

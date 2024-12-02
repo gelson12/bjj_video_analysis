@@ -4,7 +4,6 @@ from flask import Flask, request, jsonify
 import os
 import configparser
 import logging
-from pose_detection import process_video
 from video_processor import process_video_segment
 
 app = Flask(__name__)
@@ -21,7 +20,7 @@ default_config = config['DEFAULT']
 
 # Define db_config
 db_config = {
-    'db_type': config.get('DATABASE', 'db_type', fallback='sqlite'),
+    'db_type': config.get('DATABASE', 'db_type', fallback='postgres'),
     'db_host': config.get('DATABASE', 'db_host', fallback='db'),  # 'db' is the service name in docker-compose
     'db_port': config.get('DATABASE', 'db_port', fallback='5432'),
     'db_user': config.get('DATABASE', 'db_user', fallback='user'),
@@ -32,11 +31,21 @@ db_config = {
 # Configure logging with exception handling
 try:
     log_file = default_config.get('log_file', 'app.log')
-    logging.basicConfig(
-        filename=log_file,
-        level=logging.INFO,
-        format='%(asctime)s - %(levelname)s - %(message)s'
-    )
+
+    # Create a rotating file handler
+    file_handler = logging.handlers.RotatingFileHandler(log_file, maxBytes=10*1024*1024, backupCount=5)
+    file_handler.setLevel(logging.INFO)
+    file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+
+    # Create a console handler
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+    console_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+
+    # Get the root logger and set the level
+    logging.getLogger().setLevel(logging.INFO)
+    logging.getLogger().addHandler(file_handler)
+    logging.getLogger().addHandler(console_handler)
 except Exception as e:
     print(f"Failed to configure logging to file '{log_file}': {e}")
     # Fallback to console logging
@@ -116,13 +125,18 @@ def process_youtube_video():
         if not (0 <= start_time < end_time):
             return jsonify({'error': 'Invalid time range: start_time must be less than end_time and non-negative'}), 400
 
+        # Retrieve the cookies path from environment variable
+        cookies_path = os.environ.get('YTDLP_COOKIES_PATH')  # e.g., '/app/cookies.txt'
+
+        # Pass the cookies path to the processing function
         output_path = process_video_segment(
             video_url=video_url,
             start_time=start_time,
             end_time=end_time,
             position_name=position_name,
             db_config=db_config,
-            config=default_config
+            config=default_config,
+            cookies_path=cookies_path
         )
 
         return jsonify({'message': 'Video processed successfully', 'output_video': output_path}), 200
